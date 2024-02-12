@@ -5,6 +5,7 @@ import { ENVS } from 'libs/common/constants';
 import { IDatabaseCredentials } from './interfaces';
 import { UsersEntity } from 'libs/users/entitites';
 import { RefreshTokensEntity } from 'libs/auth/entities';
+import { BooksEntity } from 'libs/books/entitites';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { RefreshTokensEntity } from 'libs/auth/entities';
           username: configService.get(ENVS.POSTGRES_USER),
           password: configService.get(ENVS.POSTGRES_PASSWORD),
           database: configService.get(ENVS.POSTGRES_DB),
-          entities: [UsersEntity, RefreshTokensEntity],
+          entities: [UsersEntity, RefreshTokensEntity, BooksEntity],
           synchronize: true,
         };
 

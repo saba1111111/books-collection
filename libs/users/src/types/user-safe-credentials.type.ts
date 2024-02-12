@@ -1,3 +1,3 @@
 import { IUser } from '../interfaces';
 
-export type IUserSafe = Omit<IUser, 'password'>;
+export type TUserSafe = Omit<IUser, 'password'>;

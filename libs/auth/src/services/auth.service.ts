@@ -18,7 +18,7 @@ import { AuthHelperService } from './auth-helper.service';
 import { Request, Response } from 'express';
 import { RefreshTokensService } from './refresh-tokens.service';
 import { TOKENS } from '../constants';
-import { IUserSafe } from 'libs/users/types';
+import { TUserSafe } from 'libs/users/types';
 
 @Injectable()
 export class AuthService {
@@ -149,7 +149,7 @@ export class AuthService {
     }
   }
 
-  public async changePassword(credentials: IChangePasswordCredentials, user: IUserSafe) {
+  public async changePassword(credentials: IChangePasswordCredentials, user: TUserSafe) {
     try {
       const { newPassword, oldPassword } = credentials;
 

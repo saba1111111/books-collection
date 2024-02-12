@@ -5,7 +5,9 @@
   "compilerOptions": {
     "deleteOutDir": true,
     "webpack": true,
-    "plugins": ["@nestjs/swagger"]
+    "plugins": [
+      "@nestjs/swagger"
+    ]
   },
   "projects": {
     "database": {
@@ -69,6 +71,15 @@
       "sourceRoot": "libs/utils/src",
       "compilerOptions": {
         "tsConfigPath": "libs/utils/tsconfig.lib.json"
+      }
+    },
+    "books": {
+      "type": "library",
+      "root": "libs/books",
+      "entryFile": "index",
+      "sourceRoot": "libs/books/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/books/tsconfig.lib.json"
       }
     }
   }
