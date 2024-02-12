@@ -3,6 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ENVS } from 'libs/common/constants';
 import { IDatabaseCredentials } from './interfaces';
+import { UsersEntity } from 'libs/users/entitites';
+import { RefreshTokensEntity } from 'libs/auth/entities';
 
 @Module({
   imports: [
@@ -10,14 +12,14 @@ import { IDatabaseCredentials } from './interfaces';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
-        const databaseCredentials: IDatabaseCredentials = {
+        const databaseCredentials = {
           type: configService.get(ENVS.DATABASE_TYPE),
           host: configService.get(ENVS.POSTGRES_HOST),
           port: configService.get(ENVS.POSTGRES_PORT),
           username: configService.get(ENVS.POSTGRES_USER),
           password: configService.get(ENVS.POSTGRES_PASSWORD),
           database: configService.get(ENVS.POSTGRES_DB),
-          entities: [__dirname + '/**/*.entity{.ts,.js}'],
+          entities: [UsersEntity, RefreshTokensEntity],
           synchronize: true,
         };
 
