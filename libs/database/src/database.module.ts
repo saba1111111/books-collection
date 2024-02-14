@@ -6,6 +6,11 @@ import { IDatabaseCredentials } from './interfaces';
 import { UsersEntity } from 'libs/users/entitites';
 import { RefreshTokensEntity } from 'libs/auth/entities';
 import { BooksEntity } from 'libs/books/entitites';
+import { PagesEntity } from 'libs/pages/entities/pages.entity';
+import {
+  BooksReadTrackingEntity,
+  PagesReadingTrackingEntity,
+} from 'libs/read-tracking/entities';
 
 @Module({
   imports: [
@@ -20,7 +25,14 @@ import { BooksEntity } from 'libs/books/entitites';
           username: configService.get(ENVS.POSTGRES_USER),
           password: configService.get(ENVS.POSTGRES_PASSWORD),
           database: configService.get(ENVS.POSTGRES_DB),
-          entities: [UsersEntity, RefreshTokensEntity, BooksEntity],
+          entities: [
+            UsersEntity,
+            RefreshTokensEntity,
+            BooksEntity,
+            PagesEntity,
+            PagesReadingTrackingEntity,
+            BooksReadTrackingEntity,
+          ],
           synchronize: true,
         };
 

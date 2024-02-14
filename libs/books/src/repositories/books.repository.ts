@@ -2,33 +2,51 @@ import { Injectable } from '@nestjs/common';
 import {
   IBook,
   IBooksRepository,
-  ICreateBookCredentials,
+  ISaveBookCredentials,
   IDeleteBookCredentials,
   IUpdateBookCredentials,
+  IUpdateFullBookCredentials,
 } from '../interface';
-import { InjectRepository } from '@nestjs/typeorm';
+import { InjectDataSource, InjectRepository } from '@nestjs/typeorm';
 import { BooksEntity } from '../entitites';
-import { Repository } from 'typeorm';
-import { TFindBookCredentials, TFindBooksCredentials } from '../types';
+import { Repository, DataSource } from 'typeorm';
+import { TFindBookCredentials, TFindBooksRepositoryCredentials } from '../types';
+import { TFindBooksResponse } from '../types/find-books-response.type';
+import { ICreatePageCredentials } from 'libs/pages/interfaces';
 
 @Injectable()
 export class BooksTypeormRepository implements IBooksRepository {
   constructor(
     @InjectRepository(BooksEntity) private readonly repository: Repository<BooksEntity>,
+    @InjectDataSource() private dataSource: DataSource,
   ) {}
 
-  public create(credentials: ICreateBookCredentials): Promise<IBook> {
+  public save(credentials: ISaveBookCredentials): Promise<IBook> {
     return this.repository.save(credentials);
   }
 
-  public findOne(credentials: TFindBookCredentials): Promise<IBook> {
+  public async findOne(credentials: TFindBookCredentials): Promise<IBook> {
     const options = { where: credentials };
+
     return this.repository.findOne(options);
   }
 
-  public find(credentials: TFindBooksCredentials): Promise<IBook[]> {
-    const options = { where: credentials };
-    return this.repository.find(options);
+  public find(credentials: TFindBooksRepositoryCredentials): Promise<TFindBooksResponse> {
+    const options = { where: credentials.Where, ...credentials.Pagination };
+
+    return this.repository.findAndCount(options);
+  }
+
+  public async updateFullBook(credentials: IUpdateFullBookCredentials) {
+    const { book, pages } = credentials;
+
+    return this.dataSource.manager.transaction(async (transactionalEntityManager) => {
+      await transactionalEntityManager.save(book);
+
+      if (pages.length) {
+        await transactionalEntityManager.save(pages);
+      }
+    });
   }
 
   public async updateById(credentials: IUpdateBookCredentials): Promise<IBook> {

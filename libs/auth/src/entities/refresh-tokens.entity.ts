@@ -1,6 +1,14 @@
 import { TABLES } from 'libs/common/constants';
 import { UsersEntity } from 'libs/users/entitites';
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { RefreshTokens } from '../interfaces';
 
 @Entity({ name: TABLES.REFRESH_TOKENS_TABLE })
@@ -22,5 +30,11 @@ export class RefreshTokensEntity implements RefreshTokens {
   user: UsersEntity;
 
   @Column({ type: 'int', name: 'user_id', nullable: false })
-  userId: number;
+  public userId: number;
+
+  @CreateDateColumn()
+  public createdAt: Date;
+
+  @UpdateDateColumn()
+  public updatedAt: Date;
 }

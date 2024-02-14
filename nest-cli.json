@@ -81,6 +81,24 @@
       "compilerOptions": {
         "tsConfigPath": "libs/books/tsconfig.lib.json"
       }
+    },
+    "pages": {
+      "type": "library",
+      "root": "libs/pages",
+      "entryFile": "index",
+      "sourceRoot": "libs/pages/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/pages/tsconfig.lib.json"
+      }
+    },
+    "read-tracking": {
+      "type": "library",
+      "root": "libs/read-tracking",
+      "entryFile": "index",
+      "sourceRoot": "libs/read-tracking/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/read-tracking/tsconfig.lib.json"
+      }
     }
   }
 }

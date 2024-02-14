@@ -32,6 +32,7 @@ export class RefreshTokensTypeormRepository implements IRefreshTokenRepository {
 
   public find(credentials: TFindRefreshTokensCredentials): Promise<RefreshTokens[]> {
     const options = { where: credentials };
+
     return this.repository.find(options);
   }
 

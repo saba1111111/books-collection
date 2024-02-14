@@ -7,6 +7,7 @@ import {
   IUsersRepository,
 } from './interfaces';
 import { TFindUserCredentials, TFindUsersCredentials } from './types';
+import { EmailAlreadyInUseException, UserNotFoundException } from './errors';
 
 @Injectable()
 export class UsersService {
@@ -14,6 +15,15 @@ export class UsersService {
     @Inject(USERS_REPOSITORY_TOKEN)
     private readonly usersRepository: IUsersRepository,
   ) {}
+
+  public async checkUserExistence(id: number) {
+    const user = await this.findUser({ id: Number(id) });
+    if (!user) {
+      throw new UserNotFoundException();
+    }
+
+    return user;
+  }
 
   public createUser(credentials: ICreateUserCredentials) {
     return this.usersRepository.create(credentials);
@@ -38,7 +48,7 @@ export class UsersService {
   public async isEmailAvailable(email: string): Promise<boolean> {
     const user = await this.findUser({ email });
     if (user) {
-      throw new Error('Email already in use!');
+      throw new EmailAlreadyInUseException();
     }
 
     return true;

@@ -1,5 +1,6 @@
 import {
   ConflictException,
+  HttpException,
   Inject,
   Injectable,
   InternalServerErrorException,
@@ -19,6 +20,13 @@ import { Request, Response } from 'express';
 import { RefreshTokensService } from './refresh-tokens.service';
 import { TOKENS } from '../constants';
 import { TUserSafe } from 'libs/users/types';
+import {
+  InvalidRefreshTokenException,
+  RefreshTokenExpiredException,
+  RefreshTokenExtractionFailedException,
+  UserNotFoundFromTokenException,
+} from '../errors';
+import { handleError } from 'libs/common/helpers';
 
 @Injectable()
 export class AuthService {
@@ -41,7 +49,7 @@ export class AuthService {
 
       return { message: 'Successfully registered!', email: email };
     } catch (error) {
-      throw new InternalServerErrorException(error.message);
+      handleError(error);
     }
   }
 
@@ -63,7 +71,7 @@ export class AuthService {
 
       return { message: 'Successfully verified!' };
     } catch (error) {
-      throw new InternalServerErrorException(error.message);
+      handleError(error);
     }
   }
 
@@ -86,12 +94,11 @@ export class AuthService {
       });
 
       return res.send({
-        success: true,
         message: 'successfully login!',
         data: { user, accessToken },
       });
     } catch (error) {
-      throw new InternalServerErrorException(error.message);
+      handleError(error);
     }
   }
 
@@ -99,24 +106,24 @@ export class AuthService {
     try {
       const refreshToken = this.authHelperService.extractRefreshTokenFromRequest(req);
       if (!refreshToken) {
-        throw new Error('Failed extracting refresh token from cookies!');
+        throw new RefreshTokenExtractionFailedException();
       }
 
       const refreshTokenData = await this.refreshTokensService.findRefreshToken({
         token: refreshToken,
       });
       if (!refreshTokenData) {
-        throw new Error('Invalid Refresh token!');
+        throw new InvalidRefreshTokenException();
       }
 
       if (refreshTokenData.expireDate < Date.now()) {
         await this.refreshTokensService.deleteRefreshToken({ id: refreshTokenData.id });
-        throw new Error('Refresh Token Expire.');
+        throw new RefreshTokenExpiredException();
       }
 
       const user = await this.userService.findUser({ id: refreshTokenData.userId });
       if (!user) {
-        throw new Error('Cannot find user associated with the token!');
+        throw new UserNotFoundFromTokenException();
       }
 
       const payload = { email: user.email, userId: user.id };
@@ -124,7 +131,7 @@ export class AuthService {
 
       return { message: 'Token refreshed successfully.', accessToken };
     } catch (error) {
-      throw new InternalServerErrorException(error.message);
+      handleError(error);
     }
   }
 
@@ -145,7 +152,7 @@ export class AuthService {
 
       return res.send({ message: 'Logged out successfully.' });
     } catch (error) {
-      throw new InternalServerErrorException(error.message);
+      handleError(error);
     }
   }
 

@@ -27,6 +27,7 @@
     "@nestjs/passport": "^10.0.3",
     "@nestjs/platform-express": "^10.0.0",
     "@nestjs/swagger": "^7.3.0",
+    "@nestjs/throttler": "^5.1.2",
     "@nestjs/typeorm": "^10.0.2",
     "bcrypt": "^5.1.1",
     "class-transformer": "^0.5.1",
@@ -93,7 +94,9 @@
       "^libs/users(|/.*)$": "<rootDir>/libs/users/src/$1",
       "^libs/auth(|/.*)$": "<rootDir>/libs/auth/src/$1",
       "^libs/utils(|/.*)$": "<rootDir>/libs/utils/src/$1",
-      "^libs/books(|/.*)$": "<rootDir>/libs/books/src/$1"
+      "^libs/books(|/.*)$": "<rootDir>/libs/books/src/$1",
+      "^libs/pages(|/.*)$": "<rootDir>/libs/pages/src/$1",
+      "^libs/read-tracking(|/.*)$": "<rootDir>/libs/read-tracking/src/$1"
     }
   }
 }

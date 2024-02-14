@@ -10,7 +10,7 @@ export class EnvironmentVariablesValidationService implements OnModuleInit {
 
     const errors = await validate(envVars);
     if (errors.length > 0) {
-      throw new Error(`Environment validation error: ${errors}`);
+      throw new Error(`Environment variable  validation error: ${errors}`);
     }
   }
 }

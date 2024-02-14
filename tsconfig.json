@@ -18,54 +18,26 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "libs/database": [
-        "libs/database/src"
-      ],
-      "libs/database/*": [
-        "libs/database/src/*"
-      ],
-      "libs/common": [
-        "libs/common/src"
-      ],
-      "libs/common/*": [
-        "libs/common/src/*"
-      ],
-      "libs/cache": [
-        "libs/cache/src"
-      ],
-      "libs/cache/*": [
-        "libs/cache/src/*"
-      ],
-      "libs/mail": [
-        "libs/mail/src"
-      ],
-      "libs/mail/*": [
-        "libs/mail/src/*"
-      ],
-      "libs/users": [
-        "libs/users/src"
-      ],
-      "libs/users/*": [
-        "libs/users/src/*"
-      ],
-      "libs/auth": [
-        "libs/auth/src"
-      ],
-      "libs/auth/*": [
-        "libs/auth/src/*"
-      ],
-      "libs/utils": [
-        "libs/utils/src"
-      ],
-      "libs/utils/*": [
-        "libs/utils/src/*"
-      ],
-      "libs/books": [
-        "libs/books/src"
-      ],
-      "libs/books/*": [
-        "libs/books/src/*"
-      ]
+      "libs/database": ["libs/database/src"],
+      "libs/database/*": ["libs/database/src/*"],
+      "libs/common": ["libs/common/src"],
+      "libs/common/*": ["libs/common/src/*"],
+      "libs/cache": ["libs/cache/src"],
+      "libs/cache/*": ["libs/cache/src/*"],
+      "libs/mail": ["libs/mail/src"],
+      "libs/mail/*": ["libs/mail/src/*"],
+      "libs/users": ["libs/users/src"],
+      "libs/users/*": ["libs/users/src/*"],
+      "libs/auth": ["libs/auth/src"],
+      "libs/auth/*": ["libs/auth/src/*"],
+      "libs/utils": ["libs/utils/src"],
+      "libs/utils/*": ["libs/utils/src/*"],
+      "libs/books": ["libs/books/src"],
+      "libs/books/*": ["libs/books/src/*"],
+      "libs/pages": ["libs/pages/src"],
+      "libs/pages/*": ["libs/pages/src/*"],
+      "libs/read-tracking": ["libs/read-tracking/src"],
+      "libs/read-tracking/*": ["libs/read-tracking/src/*"]
     }
   }
 }
