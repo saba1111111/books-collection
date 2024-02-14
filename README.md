@@ -1,5 +1,3 @@
-# Finance App
-
 This project lets users share and read books with others. It also tracks reading progress, page by page, opening up future possibilities for creating personalized and engaging user experiences.
 
 To run a project, simply clone or download it and run this command:
