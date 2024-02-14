@@ -26,7 +26,7 @@ export class BooksTypeormRepository implements IBooksRepository {
   }
 
   public async findOne(credentials: TFindBookCredentials): Promise<IBook> {
-    const options = { where: credentials };
+    const options = { where: credentials, relations: ['pages'] };
 
     return this.repository.findOne(options);
   }
