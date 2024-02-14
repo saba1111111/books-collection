@@ -6,6 +6,8 @@ To run a project, simply clone or download it and run this command:
 docker compose up
 ```
 
+**Important**: Before attempting to run this project, ensure you have configured all the necessary environment variables. [Click here](#environment-configuration) to jump to the Environment Configuration section.
+
 ## Project Structure
 
 ```
@@ -50,3 +52,33 @@ This project is built upon a robust stack of modern technologies, each chosen fo
 - **PostgreSQL**: An advanced open-source relational database, chosen for its reliability, feature robustness, and active community support.
 - **TypeORM**: An ORM (Object-Relational Mapping) library for TypeScript and JavaScript, enabling seamless database interactions through an object-oriented model. It simplifies data manipulation and ensures type safety.
 - **Redis**: An in-memory data structure store, used as a database, cache, and message broker. It enhances performance by caching frequently accessed data and supporting various data structures for efficient data management.
+
+# Environment Configuration
+
+To successfully run this project, certain environment variables must be set. These variables configure the application's connections to databases, external services, and define key parameters for its operation. Below is a list of the required environment variables, categorized by their respective services:
+
+## PostgreSQL Database Configuration
+
+- `DATABASE_TYPE`: The type of database used (should be set to `postgres`).
+- `POSTGRES_HOST`: Hostname of the PostgreSQL server.
+- `POSTGRES_PORT`: Port on which the PostgreSQL server is running.
+- `POSTGRES_USER`: Username for PostgreSQL authentication.
+- `POSTGRES_PASSWORD`: Password for PostgreSQL authentication.
+- `POSTGRES_DB`: Name of the PostgreSQL database to connect to.
+
+## Redis Configuration
+
+- `REDIS_PORT`: Port on which the Redis server is running.
+- `REDIS_HOST`: Hostname of the Redis server.
+
+## Email Account Configuration
+
+- `EMAIL`: Email address used for sending emails.
+- `EMAIL_PASSWORD`: Password for the email account.
+
+## Token Configuration
+
+- `ACCESS_TOKEN_SECRET`: Secret key for signing JWT access tokens.
+- `ACCESS_TOKEN_EXPIRATION_TIME`: Expiration time for JWT access tokens.
+- `REFRESH_TOKEN_SECRET`: Secret key for signing JWT refresh tokens.
+- `REFRESH_TOKEN_EXPIRATION_TIME`: Expiration time for JWT refresh tokens.
